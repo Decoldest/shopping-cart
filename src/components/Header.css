@@ -1,0 +1,35 @@
+@media screen and (max-width: 600px) {
+  div>header, div nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 0px;
+  }
+}
+
+header {
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.logo {
+  flex: 2;
+  padding-top: 5px;
+}
+
+.shopping-cart img {
+  max-width: 40px;
+}
+
+nav {
+  flex: 2;
+  display: flex;
+  justify-content: space-around;
+}
+
+.logo img {
+  width: 300px;
+  height: auto;
+}
+
