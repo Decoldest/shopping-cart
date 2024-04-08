@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { ShopContext } from "../App";
 
-
 export default function Header() {
   const { cartItems } = useContext(ShopContext);
 
@@ -22,7 +21,7 @@ export default function Header() {
       <Link to={"cart"}>
         <div className="shopping-cart">
           <img src={cart} alt="shopping cart" />
-          <h5>{cartItems.length}</h5>
+          <h5>{cartItems.reduce((acc, curr) => acc + curr.quantity, 0)}</h5>
         </div>
       </Link>
     </header>
