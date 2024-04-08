@@ -19,6 +19,7 @@ const items = [
     description:
       "Edith (Even Dead, I'm The Hero) is an artificial intelligence system created by Tony Stark. It stands for 'Even Dead, I'm The Hero.' Edith gives its user access to a network of weaponized drones and has vast surveillance capabilities.",
     image: "./edith.png",
+    salePrice: 2500000,
   },
   {
     name: "Hulkbuster",
@@ -47,6 +48,7 @@ const items = [
     description:
       "The Mark 2 is one of the early Iron Man suits developed by Tony Stark. It is the first suit to feature the iconic red and gold color scheme and improved flight capabilities compared to the Mark 1.",
     image: "./mark-2.png",
+    salePrice: 21000000,
   },
   {
     name: "Mark 3",
@@ -75,6 +77,7 @@ const items = [
     description:
       "The Suitcase Armor, also known as the Mark V, is a compact Iron Man suit designed for portability. It is stored in a suitcase and can be quickly assembled into a full suit of armor for emergencies.",
     image: "./suitcase-armour.png",
+    salePrice: 12000000,
   },
   {
     name: "War Machine",
@@ -104,7 +107,9 @@ function App() {
   console.log(cartItems);
 
   const addToCart = (item) => {
-    const index = cartItems.findIndex((cartItem) => cartItem.name === item.name);
+    const index = cartItems.findIndex(
+      (cartItem) => cartItem.name === item.name,
+    );
     if (index > 0) {
       const updatedCartItems = [...cartItems];
       updatedCartItems[index].quantity += 1;
@@ -113,7 +118,6 @@ function App() {
       setCartItems([...cartItems, { ...item, quantity: 1 }]);
     }
   };
-  
 
   useEffect(() => {
     setShopItems(items);

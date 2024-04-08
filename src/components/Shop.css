@@ -17,3 +17,16 @@
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   padding: 20px;
 }
+
+.product-display {
+  padding: 20px 70px;
+  display: flex;
+}
+
+.product-display>img {
+  width: 50%;
+}
+
+.product-details {
+  flex: 2;
+}
