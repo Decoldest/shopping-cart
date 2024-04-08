@@ -1,0 +1,19 @@
+.item-card {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  margin: 10px;
+  border: 1px solid grey;
+}
+
+.item-card>img {
+  height: 500px;
+  width: auto;
+  object-fit: contain;
+}
+
+.shop-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  padding: 20px;
+}
