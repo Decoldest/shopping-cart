@@ -30,7 +30,7 @@ export default function Cart() {
       <div className="cart-container">
         <h1>Cart Items</h1>
         <h5>Free shipping on all items</h5>
-        {!cartItems.length && <h3>No items in cart</h3>}
+        {!cartItems.length && <h2 className="no-items">No items in cart</h2>}
         {displayItem ? (
           <DisplayCard
             item={displayItem}
@@ -50,10 +50,12 @@ export default function Cart() {
           </div>
         )}
       </div>
-      <div className="total">
-        <h1>Total</h1>
-        <h4>{total}</h4>
-      </div>
+      {total > 0 && (
+        <div className="total">
+          <h1>Total</h1>
+          <h3>$ {total}</h3>
+        </div>
+      )}
     </>
   );
 }

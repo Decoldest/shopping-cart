@@ -39,14 +39,21 @@ export default function Shop() {
   );
 }
 
-function ItemCard({ item, setDisplayItem }) {
+export function ItemCard({ item, setDisplayItem }) {
   const { addToCart } = useContext(ShopContext);
 
   return (
     <div className="item-card" onClick={() => setDisplayItem(item)}>
       <h1>{item.name}</h1>
       <img src={item.image} alt={item.name} />
-      <h4 className="pricetag">$ {item.price}</h4>
+      {item.salePrice ? (
+        <>
+          <h4 className="sale-price">$ {item.salePrice}</h4>
+          <h5 className="sale-price">Sale</h5>
+        </>
+      ) : (
+        <h4 className="pricetag">$ {item.price}</h4>
+      )}
 
       <button
         onClick={(e) => {
@@ -60,7 +67,7 @@ function ItemCard({ item, setDisplayItem }) {
   );
 }
 
-function DisplayCard({ item, setDisplayItem }) {
+export function DisplayCard({ item, setDisplayItem }) {
   const { addToCart } = useContext(ShopContext);
 
   return (
@@ -69,11 +76,29 @@ function DisplayCard({ item, setDisplayItem }) {
         <img src={item.image} alt={item.name} />
       </div>
       <div className="product-details">
+        <button
+          className="product-display-close"
+          onClick={() => setDisplayItem(null)}
+        >
+          Close
+        </button>
+
         <h1>{item.name}</h1>
-        <button onClick={() => setDisplayItem(null)}>Close</button>
-        <h4>{item.price}</h4>
+
+        {item.salePrice ? (
+          <h4 style={{ color: "red" }}>$ {item.salePrice}</h4>
+        ) : (
+          <h4>$ {item.price}</h4>
+        )}
         <p>{item.description}</p>
-        <button onClick={() => addToCart(item)}>Add to Cart</button>
+        <button
+          onClick={() => {
+            addToCart(item);
+            setDisplayItem(null);
+          }}
+        >
+          Add to Cart
+        </button>
       </div>
     </div>
   );
