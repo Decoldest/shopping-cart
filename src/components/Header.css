@@ -48,3 +48,8 @@ header {
 nav {
   gap: 100px;
 }
+
+a:visited {
+  text-decoration: none;
+  color: black;
+}

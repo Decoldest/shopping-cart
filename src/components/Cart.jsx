@@ -19,10 +19,11 @@ export default function Cart() {
   const { cartItems } = useContext(ShopContext);
   const [displayItem, setDisplayItem] = useState(null);
   const total = useMemo(() => {
-    return cartItems.reduce(
-      (total, item) => total + item.price * item.quantity,
-      0,
-    );
+    return cartItems.reduce((total, item) => {
+      return item.salePrice
+        ? total + item.salePrice * item.quantity
+        : total + item.price * item.quantity;
+    }, 0);
   }, [cartItems]);
 
   return (
@@ -63,14 +64,20 @@ export default function Cart() {
 function ItemCard({ item, setDisplayItem }) {
   return (
     <div className="cart-card">
-      <img
-        src={item.image}
-        alt={item.name}
-        onClick={() => setDisplayItem(item)}
-      />
+      <div style={{ flexBasis: "20%" }}>
+        <img
+          src={item.image}
+          alt={item.name}
+          onClick={() => setDisplayItem(item)}
+        />
+      </div>
       <h1 style={{ flexBasis: "30%" }}>{item.name}</h1>
-      <h4>qty: {item.quantity}</h4>
-      <h4>${item.price}</h4>
+      <h4 style={{ flexBasis: "20%" }}> qty: {item.quantity}</h4>
+      {item.salePrice ? (
+        <h4 style={{ color: "red" }}>$ {item.salePrice}</h4>
+      ) : (
+        <h4>$ {item.price}</h4>
+      )}
     </div>
   );
 }

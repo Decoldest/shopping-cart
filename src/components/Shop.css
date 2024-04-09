@@ -23,6 +23,11 @@
   align-self: center;
 }
 
+.item-card button:active, .product-details button:active {
+  color: rgb(209, 209, 209);
+  background-color: rgb(37, 84, 165);
+}
+
 .pricetag {
   margin-left: 10%;
   margin-bottom: 10px;
@@ -72,7 +77,7 @@
   border-bottom: solid 1px rgb(206, 206, 206);
 }
 
-.cart-card>img {
+.cart-card img {
   max-height: 200px;
   max-width: 200px;
 }

@@ -2,6 +2,8 @@ import { useState, useContext } from "react";
 import PropTypes from "prop-types";
 import { ShopContext } from "../App";
 import "./Shop.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 ItemCard.propTypes = {
   item: PropTypes.object,
@@ -9,37 +11,60 @@ ItemCard.propTypes = {
   price: PropTypes.number,
   image: PropTypes.node,
   setDisplayItem: PropTypes.func,
+  notify: PropTypes.func,
 };
 
 DisplayCard.propTypes = {
   item: PropTypes.object,
   setDisplayItem: PropTypes.func,
+  notify: PropTypes.func,
 };
 
 export default function Shop() {
   const { shopItems } = useContext(ShopContext);
   const [displayItem, setDisplayItem] = useState(null);
-  return displayItem ? (
-    <DisplayCard
-      item={displayItem}
-      setDisplayItem={setDisplayItem}
-    ></DisplayCard>
-  ) : (
-    <div className="shop-container">
-      {shopItems.map((item) => {
-        return (
-          <ItemCard
-            key={item.name + "card"}
-            item={item}
-            setDisplayItem={setDisplayItem}
-          ></ItemCard>
-        );
-      })}
-    </div>
+
+  const notify = (message) => {
+    toast.success(message, {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
+
+  return (
+    <>
+      {displayItem ? (
+        <DisplayCard
+          item={displayItem}
+          setDisplayItem={setDisplayItem}
+          notify={notify}
+        ></DisplayCard>
+      ) : (
+        <div className="shop-container">
+          {shopItems.map((item) => {
+            return (
+              <ItemCard
+                key={item.name + "card"}
+                item={item}
+                setDisplayItem={setDisplayItem}
+                notify={notify}
+              ></ItemCard>
+            );
+          })}
+        </div>
+      )}
+      <ToastContainer />
+    </>
   );
 }
 
-export function ItemCard({ item, setDisplayItem }) {
+export function ItemCard({ item, setDisplayItem, notify }) {
   const { addToCart } = useContext(ShopContext);
 
   return (
@@ -58,6 +83,7 @@ export function ItemCard({ item, setDisplayItem }) {
       <button
         onClick={(e) => {
           e.stopPropagation();
+          notify("Added to cart");
           addToCart(item);
         }}
       >
@@ -67,7 +93,7 @@ export function ItemCard({ item, setDisplayItem }) {
   );
 }
 
-export function DisplayCard({ item, setDisplayItem }) {
+export function DisplayCard({ item, setDisplayItem, notify }) {
   const { addToCart } = useContext(ShopContext);
 
   return (
@@ -93,6 +119,7 @@ export function DisplayCard({ item, setDisplayItem }) {
         <p>{item.description}</p>
         <button
           onClick={() => {
+            notify("Added to cart");
             addToCart(item);
             setDisplayItem(null);
           }}
