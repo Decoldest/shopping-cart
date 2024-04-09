@@ -90,7 +90,7 @@ const items = [
     name: "Nano Gauntlet",
     price: 10000000,
     description:
-      "The Nano Gauntlet is a powerful artifact designed to harness the power of the Infinity Stones. It grants its wielder control over all aspects of reality, making them nearly omnipotent. Slightly used",
+      "The Nano Gauntlet is a powerful artifact designed to harness the power of the Infinity Stones. It grants its wielder control over all aspects of reality, making them nearly omnipotent. Slightly used.",
     image: "./nano-gauntlet.png",
   },
 ];

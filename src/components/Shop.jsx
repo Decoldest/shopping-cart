@@ -30,7 +30,7 @@ export default function Shop() {
       autoClose: 3000,
       hideProgressBar: false,
       closeOnClick: true,
-      pauseOnHover: true,
+      pauseOnHover: false,
       draggable: true,
       progress: undefined,
       theme: "light",
@@ -59,7 +59,7 @@ export default function Shop() {
           })}
         </div>
       )}
-      <ToastContainer />
+      <ToastContainer pauseOnFocusLoss={false} />
     </>
   );
 }
