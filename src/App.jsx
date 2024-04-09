@@ -87,10 +87,10 @@ const items = [
     image: "./war-machine.png",
   },
   {
-    name: "Infinity Gauntlet",
+    name: "Nano Gauntlet",
     price: 10000000,
     description:
-      "The Infinity Gauntlet is a powerful artifact designed to harness the power of the Infinity Stones. It grants its wielder control over all aspects of reality, making them nearly omnipotent.",
+      "The Nano Gauntlet is a powerful artifact designed to harness the power of the Infinity Stones. It grants its wielder control over all aspects of reality, making them nearly omnipotent. Slightly used",
     image: "./nano-gauntlet.png",
   },
 ];
@@ -107,12 +107,13 @@ function App() {
   console.log(cartItems);
 
   const addToCart = (item) => {
-    const index = cartItems.findIndex(
+    const existingItemIndex = cartItems.findIndex(
       (cartItem) => cartItem.name === item.name,
     );
-    if (index > 0) {
+
+    if (existingItemIndex !== -1) {
       const updatedCartItems = [...cartItems];
-      updatedCartItems[index].quantity += 1;
+      updatedCartItems[existingItemIndex].quantity += 1;
       setCartItems(updatedCartItems);
     } else {
       setCartItems([...cartItems, { ...item, quantity: 1 }]);

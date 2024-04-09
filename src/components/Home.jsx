@@ -5,6 +5,7 @@ import plans from "../images/plans.gif";
 import reactor from "../images/arc-reactor-home.png";
 import materials from "../images/materials.png";
 import crops from "../images/crops.jpeg";
+import { Link } from "react-router-dom";
 
 HomeImage.propTypes = {
   className: PropTypes.string,
@@ -55,8 +56,8 @@ function HomeImage({
         className="see-more-container"
         style={{ display: "flex", gap: "10px", marginBottom: "50px" }}
       >
-        {lightButtonText && <Button>{lightButtonText}</Button>}
-        <DarkButton>{darkButtonText}</DarkButton>
+        {lightButtonText && <Link to={"shop"}><Button>{lightButtonText}</Button></Link>}
+        <Link to={"about"}><DarkButton>{darkButtonText}</DarkButton></Link>
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 import { ShopContext } from "../App";
-import { useContext, useState } from "react";
+import { useContext, useState, useMemo } from "react";
 import PropTypes from "prop-types";
 
 ItemCard.propTypes = {
@@ -18,33 +18,57 @@ DisplayCard.propTypes = {
 export default function Cart() {
   const { cartItems } = useContext(ShopContext);
   const [displayItem, setDisplayItem] = useState(null);
-  return displayItem ? (
-    <DisplayCard
-      item={displayItem}
-      setDisplayItem={setDisplayItem}
-    ></DisplayCard>
-  ) : (
-    <div className="shop-container">
-      {cartItems.map((item) => {
-        return (
-          <ItemCard
-            key={item.name + "card"}
-            item={item}
+  const total = useMemo(() => {
+    return cartItems.reduce(
+      (total, item) => total + item.price * item.quantity,
+      0,
+    );
+  }, [cartItems]);
+
+  return (
+    <>
+      <div className="cart-container">
+        <h1>Cart Items</h1>
+        <h5>Free shipping on all items</h5>
+        {!cartItems.length && <h3>No items in cart</h3>}
+        {displayItem ? (
+          <DisplayCard
+            item={displayItem}
             setDisplayItem={setDisplayItem}
-          ></ItemCard>
-        );
-      })}
-    </div>
+          ></DisplayCard>
+        ) : (
+          <div>
+            {cartItems.map((item) => {
+              return (
+                <ItemCard
+                  key={item.name + "card"}
+                  item={item}
+                  setDisplayItem={setDisplayItem}
+                ></ItemCard>
+              );
+            })}
+          </div>
+        )}
+      </div>
+      <div className="total">
+        <h1>Total</h1>
+        <h4>{total}</h4>
+      </div>
+    </>
   );
 }
 
 function ItemCard({ item, setDisplayItem }) {
   return (
-    <div className="cart-card" onClick={() => setDisplayItem(item)}>
-      <img src={item.image} alt={item.name} />
-      <h1>{item.name}</h1>
-      <h4>${item.price}</h4>
+    <div className="cart-card">
+      <img
+        src={item.image}
+        alt={item.name}
+        onClick={() => setDisplayItem(item)}
+      />
+      <h1 style={{ flexBasis: "30%" }}>{item.name}</h1>
       <h4>qty: {item.quantity}</h4>
+      <h4>${item.price}</h4>
     </div>
   );
 }

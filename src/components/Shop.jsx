@@ -46,9 +46,16 @@ function ItemCard({ item, setDisplayItem }) {
     <div className="item-card" onClick={() => setDisplayItem(item)}>
       <h1>{item.name}</h1>
       <img src={item.image} alt={item.name} />
-      <h4>{item.price}</h4>
+      <h4 className="pricetag">$ {item.price}</h4>
 
-      <button onClick={() => addToCart(item)}>Add to Cart</button>
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          addToCart(item);
+        }}
+      >
+        Add to Cart
+      </button>
     </div>
   );
 }
@@ -58,7 +65,9 @@ function DisplayCard({ item, setDisplayItem }) {
 
   return (
     <div className="product-display">
-      <img src={item.image} alt={item.name} />
+      <div className="cart-img">
+        <img src={item.image} alt={item.name} />
+      </div>
       <div className="product-details">
         <h1>{item.name}</h1>
         <button onClick={() => setDisplayItem(null)}>Close</button>
